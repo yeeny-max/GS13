@@ -26,6 +26,7 @@
 			if(iscarbon(user))
 				var/mob/living/carbon/U = user
 				U.adjust_fatness(-10, FATTENING_TYPE_WEIGHT_LOSS)
+				U.adjust_fitness(10, FITTENING_TYPE_FITNESS_GAIN)
 			if(reps < 16)
 				reps += 0.4
 		else

@@ -242,6 +242,7 @@
 #define EYE_DAMAGE "eye_damage"
 #define GENETIC_MUTATION "genetic"
 #define OBESITY "obesity"
+#define FITNESS "fitness"
 #define MAGIC_TRAIT "magic"
 #define TRAUMA_TRAIT "trauma"
 #define DISEASE_TRAIT "disease"

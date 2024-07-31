@@ -1605,13 +1605,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			null,
 			"<span class='danger'>You suddenly feel blubbery!</span>")
 
-/datum/species/proc/handle_digestion(mob/living/carbon/human/H)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		return //hunger is for BABIES
-
-	handle_fatness(H) // GS13
-
-	//fitness handling
+				//fitness handling
 /datum/species/proc/handle_fitness_trait(mob/living/carbon/human/H, trait, trait_lose, trait_gain, fitness_lose, fitness_gain, chat_lose, chat_gain)
 	if(H.fitness < fitness_lose)
 		if (chat_lose)
@@ -1649,7 +1643,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			FITNESS_LEVEL_FIT,
 			FITNESS_LEVEL_TONED,
 			"<span class='notice'>You feel a bit healthier!</span>")
-		return
 	else
 		handle_fitness_trait(
 			H,
@@ -1659,8 +1652,15 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			0,
 			FITNESS_LEVEL_FIT,
 			null,
-			"span class='notice'>Your body starts to feel a bit more conditioned....</span>")
+			"<span class='notice'>Your body starts to feel a bit more conditioned....</span>")
 
+
+/datum/species/proc/handle_digestion(mob/living/carbon/human/H)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
+		return //hunger is for BABIES
+
+	handle_fatness(H) // GS13
+	handle_fitness(H)
 
 	// nutrition decrease and satiety
 	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
