@@ -198,6 +198,16 @@
 	desc = "Your body's beginning to display the first signs of softened curves, though they're barely noticeable."
 	icon_state = "fat"
 
+//GS13 - Fitness Alerts
+/obj/screen/alert/halseyplaceholder
+	name = "Toned"
+	desc = "Ass Tactics With General Ass: shit, or die farting."
+	icon_state = "halseyplaceholder"
+
+/obj/screen/alert/halseyplaceholder
+	name = "Fit"
+	desc = "Furlington Boat Cactory"
+	icon_state = "halseyplaceholder"
 
 //GS13 - fullness alerts
 /obj/screen/alert/bloated

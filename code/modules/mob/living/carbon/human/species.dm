@@ -1369,10 +1369,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(fatty, "<span class='notice'>You have become thin enough to regain some of your mobility.</span>")
 			REMOVE_TRAIT(fatty, TRAIT_NO_MOVE, HELPLESSNESS_TRAIT)
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NO_MOVE, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_NO_MOVE, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_clumsy)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_CLUMSY, HELPLESSNESS_TRAIT))
@@ -1382,10 +1378,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		else if(fatty.fatness < preferences.helplessness_clumsy)
 			to_chat(fatty, "<span class='notice'>You feel like you have lost enough weight to recover your dexterity.</span>")
-			REMOVE_TRAIT(fatty, TRAIT_CLUMSY, HELPLESSNESS_TRAIT)
-
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_CLUMSY, HELPLESSNESS_TRAIT))
 			REMOVE_TRAIT(fatty, TRAIT_CLUMSY, HELPLESSNESS_TRAIT)
 
 
@@ -1399,10 +1391,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(fatty, "<span class='notice'>You are thin enough to see your enviornment again. </span>")
 			fatty.cure_nearsighted(HELPLESSNESS_TRAIT)
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NEARSIGHT, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_NEARSIGHT, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_hidden_face)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_DISFIGURED, HELPLESSNESS_TRAIT))
@@ -1414,10 +1402,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(fatty, "<span class='notice'>You have lost enough weight to allow people to now recognize your face.</span>")
 			REMOVE_TRAIT(fatty, TRAIT_DISFIGURED, HELPLESSNESS_TRAIT)
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_DISFIGURED, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_DISFIGURED, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_mute)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_MUTE, HELPLESSNESS_TRAIT))
@@ -1427,10 +1411,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		else if(fatty.fatness < preferences.helplessness_mute)
 			to_chat(fatty, "<span class='notice'>You are thin enough now to be able to speak again. </span>")
-			REMOVE_TRAIT(fatty, TRAIT_MUTE, HELPLESSNESS_TRAIT)
-
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_MUTE, HELPLESSNESS_TRAIT))
 			REMOVE_TRAIT(fatty, TRAIT_MUTE, HELPLESSNESS_TRAIT)
 
 
@@ -1448,10 +1428,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			REMOVE_TRAIT(fatty, TRAIT_PARALYSIS_R_ARM, HELPLESSNESS_TRAIT)
 			fatty.update_disabled_bodyparts()
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_PARALYSIS_L_ARM, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_PARALYSIS_L_ARM, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_clothing_jumpsuit)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_NO_JUMPSUIT, HELPLESSNESS_TRAIT))
@@ -1465,10 +1441,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		else if(fatty.fatness < preferences.helplessness_clothing_jumpsuit)
 			to_chat(fatty, "<span class='notice'>You feel thin enough to put on jumpsuits now. </span>")
-			REMOVE_TRAIT(fatty, TRAIT_NO_JUMPSUIT, HELPLESSNESS_TRAIT)
-
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NO_JUMPSUIT, HELPLESSNESS_TRAIT))
 			REMOVE_TRAIT(fatty, TRAIT_NO_JUMPSUIT, HELPLESSNESS_TRAIT)
 
 
@@ -1496,10 +1468,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(fatty, "<span class='notice'>You feel thin enough to put on suits, shoes, and gloves now. </span>")
 			REMOVE_TRAIT(fatty, TRAIT_NO_MISC, HELPLESSNESS_TRAIT)
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NO_MISC, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_NO_MISC, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_clothing_back)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_NO_BACKPACK, HELPLESSNESS_TRAIT))
@@ -1514,10 +1482,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(fatty, "<span class='notice'>You feel thin enough to hold items on your back now. </span>")
 			REMOVE_TRAIT(fatty, TRAIT_NO_BACKPACK, HELPLESSNESS_TRAIT)
 
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NO_BACKPACK, HELPLESSNESS_TRAIT))
-			REMOVE_TRAIT(fatty, TRAIT_NO_BACKPACK, HELPLESSNESS_TRAIT)
-
 
 	if(preferences.helplessness_no_buckle)
 		if(!HAS_TRAIT_FROM(fatty, TRAIT_NO_BUCKLE, HELPLESSNESS_TRAIT))
@@ -1527,10 +1491,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		else if(fatty.fatness < preferences.helplessness_no_buckle)
 			to_chat(fatty, "<span class='notice'>You feel thin enough to sit on things again. </span>")
-			REMOVE_TRAIT(fatty, TRAIT_NO_BUCKLE, HELPLESSNESS_TRAIT)
-
-	else
-		if(HAS_TRAIT_FROM(fatty, TRAIT_NO_BUCKLE, HELPLESSNESS_TRAIT))
 			REMOVE_TRAIT(fatty, TRAIT_NO_BUCKLE, HELPLESSNESS_TRAIT)
 
 
@@ -1651,6 +1611,57 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	handle_fatness(H) // GS13
 
+	//fitness handling
+/datum/species/proc/handle_fitness_trait(mob/living/carbon/human/H, trait, trait_lose, trait_gain, fitness_lose, fitness_gain, chat_lose, chat_gain)
+	if(H.fitness < fitness_lose)
+		if (chat_lose)
+			to_chat(H, chat_lose)
+		if (trait)
+			REMOVE_TRAIT(H, trait, FITNESS)
+		if (trait_lose)
+			ADD_TRAIT(H, trait_lose, FITNESS)
+	else if(H.fitness >= fitness_gain)
+		if (chat_gain)
+			to_chat(H, chat_gain)
+		if (trait)
+			REMOVE_TRAIT(H, trait, FITNESS)
+		if (trait_gain)
+			ADD_TRAIT(H, trait_gain, FITNESS)
+
+/datum/species/proc/handle_fitness(mob/living/carbon/human/H)
+
+	if(HAS_TRAIT(H, TRAIT_TONED))
+		handle_fitness_trait(
+			H,
+			TRAIT_TONED,
+			TRAIT_FIT,
+			TRAIT_WELL_TONED,
+			FITNESS_LEVEL_TONED,
+			FITNESS_LEVEL_WELL_TONED,
+			"<span class='notice'>You feel like you could run a mile!</span>")
+		return
+	if(HAS_TRAIT(H, TRAIT_FIT))
+		handle_fitness_trait(
+			H,
+			TRAIT_FIT,
+			null,
+			TRAIT_TONED,
+			FITNESS_LEVEL_FIT,
+			FITNESS_LEVEL_TONED,
+			"<span class='notice'>You feel a bit healthier!</span>")
+		return
+	else
+		handle_fitness_trait(
+			H,
+			null,
+			null,
+			TRAIT_FIT,
+			0,
+			FITNESS_LEVEL_FIT,
+			null,
+			"span class='notice'>Your body starts to feel a bit more conditioned....</span>")
+
+
 	// nutrition decrease and satiety
 	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY HUNGER
@@ -1759,6 +1770,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(0 to FATNESS_LEVEL_FAT)
 			H.clear_alert("fatness")
 
+
+	switch(H.fitness)
+		if(FITNESS_LEVEL_TONED to FITNESS_LEVEL_WELL_TONED)
+			H.throw_alert("fitness", /obj/screen/alert/halseyplaceholder)
+
+		if(FITNESS_LEVEL_FIT to FITNESS_LEVEL_TONED)
+			H.throw_alert("fitness", /obj/screen/alert/halseyplaceholder)
+
+		if(0 to FITNESS_LEVEL_FIT)
+			H.clear_alert("fitness")
 
 /datum/species/proc/handle_thirst(mob/living/carbon/human/H)
 	if(HAS_TRAIT(src, TRAIT_NOTHIRST))

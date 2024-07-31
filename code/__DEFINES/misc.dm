@@ -533,3 +533,9 @@ GLOBAL_LIST_INIT(lighter_reskins, list(ZIPPO_SKIN_PLAIN = "plain", ZIPPO_SKIN_DA
 #define FATTENING_TYPE_WEIGHT_LOSS "weight_loss"
 
 #define FATNESS_TO_WEIGHT_RATIO 0.25
+
+//fitness gain types
+#define MINIMUM_FITNESS_LEVEL 0
+
+#define FITTENING_TYPE_ITEM "item"
+#define FITTENING_TYPE_FITNESS_GAIN "fitness_gain"
